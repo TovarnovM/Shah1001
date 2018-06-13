@@ -75,8 +75,8 @@ namespace xml_tst {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            var xsd_path = @"E:\qt46\SIM\data\settings.xsd";
-            var xml_path = @"E:\qt46\SIM\data\some.xml";
+            var xsd_path = @"D:\qt46\SIM\data\settings.xsd";
+            var xml_path = @"D:\qt46\SIM\data\some.xml";
             var xdoc = XDocument.Load(xml_path);
             xdoc = new XDocument(xdoc);
             XmlSchemaSet schemas = new XmlSchemaSet();

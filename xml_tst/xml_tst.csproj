@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataRepresent\NodeArgument.cs" />
+    <Compile Include="DataRepresent\TreeNode.cs" />
+    <Compile Include="DataRepresent\TreeMaker.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
