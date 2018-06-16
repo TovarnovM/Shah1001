@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Schema;
 
-namespace xml_tst.DataRepresent {
+namespace xml_tst.TreeModel {
     public class TreeMaker {
         public TreeMaker(XDocument doc, XmlSchemaSet schema) {
             Doc = doc;

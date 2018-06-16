@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewWithViewModelDemo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLib", "BusinessLib\BusinessLib.csproj", "{10B78211-364B-46CF-B310-22457F5669D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimizer", "Optimizer\Optimizer.csproj", "{A71DDDD5-4AD1-414D-AD66-47726D9AACB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{10B78211-364B-46CF-B310-22457F5669D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B78211-364B-46CF-B310-22457F5669D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B78211-364B-46CF-B310-22457F5669D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A71DDDD5-4AD1-414D-AD66-47726D9AACB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71DDDD5-4AD1-414D-AD66-47726D9AACB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71DDDD5-4AD1-414D-AD66-47726D9AACB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71DDDD5-4AD1-414D-AD66-47726D9AACB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

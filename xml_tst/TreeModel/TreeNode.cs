@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace xml_tst.DataRepresent {
+namespace xml_tst.TreeModel {
     public class TreeNode {
         public string Name { get; set; }
         public List<TreeNode> Childs { get; set; } = new List<TreeNode>();

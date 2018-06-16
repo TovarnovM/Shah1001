@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace xml_tst.DataRepresent {
+namespace xml_tst.TreeModel { 
     public class NodeArgument<T> {
-        public NodeArgument(string name, ) {
+        public NodeArgument(string name ) {
 
         }
     }
