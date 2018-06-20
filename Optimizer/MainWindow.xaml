@@ -4,9 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Optimizer"
+        xmlns:pageChoose="clr-namespace:Optimizer.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <TabControl>
+            <TabItem Header="4tst">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
         
+                    <!--1st col-->
+                    <TreeView x:Name="tv_xml" Grid.Column="1" Grid.Row="1">
+            
+                    </TreeView>
+        
+                    <!--2nd col-->
+                    <ScrollViewer Grid.Column="2" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="textBlock_xml" />    
+                    </ScrollViewer>
+        
+                </Grid>                
+            </TabItem>
+            <TabItem Header="Выбор параметров">
+                <Grid>
+                    <pageChoose:ChooseAttrXml x:Name="ChooseAttrXmlView"/>
+                </Grid>
+                
+            </TabItem>
+        </TabControl>
     </Grid>
+
 </Window>

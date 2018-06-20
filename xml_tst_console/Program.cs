@@ -10,8 +10,8 @@ using System.Xml.Serialization;
 namespace xml_tst_console {
     class Program {
         static void Main(string[] args) {
-            var xsd_path = @"E:\qt46\SIM\data\settings.xsd";
-            var xml_path = @"E:\qt46\SIM\data\some.xml";
+            var xsd_path = @"D:\qt46\SIM\data\settings.xsd";
+            var xml_path = @"D:\qt46\SIM\data\some.xml";
             var xdoc = XDocument.Load(xml_path);
             foreach (var e in GetAllElems(xdoc)
                                 .Where(el=>el.HasAttributes)

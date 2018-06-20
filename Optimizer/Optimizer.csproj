@@ -54,6 +54,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VievModels\NodeXMLAttrViewModel.cs" />
+    <Compile Include="VievModels\NodeXMLViewModel.cs" />
+    <Compile Include="VievModels\TreeXMLViewModel.cs" />
+    <Compile Include="VievModels\VariateListViewModel.cs" />
+    <Compile Include="Views\ChooseAttrXml.xaml.cs">
+      <DependentUpon>ChooseAttrXml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TreeAttrView.xaml.cs">
+      <DependentUpon>TreeAttrView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TreeNodeView.xaml.cs">
+      <DependentUpon>TreeNodeView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,8 +79,24 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ChooseAttrXml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TreeAttrView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TreeNodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\NodeAttribute.cs" />
+    <Compile Include="Models\NotifyBase.cs" />
+    <Compile Include="Models\TreeMaker.cs" />
+    <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,9 +123,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="VievModels\" />
-    <Folder Include="Views\" />
+    <Folder Include="Models\Genetic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

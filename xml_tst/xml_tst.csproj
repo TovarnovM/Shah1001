@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="TreeModel\NodeArgument.cs" />
+    <Compile Include="TreeModel\NodeAttribute.cs" />
     <Compile Include="TreeModel\TreeNode.cs" />
     <Compile Include="TreeModel\TreeMaker.cs" />
     <Compile Include="UserControl1.xaml.cs">
