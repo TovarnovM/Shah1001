@@ -40,8 +40,12 @@
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <ListView Grid.Column="3" Grid.Row="2">
-            
+        <ListView Grid.Column="3" Grid.Row="2" ItemsSource="{Binding VarList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:VarAttrListItemView/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </UserControl>

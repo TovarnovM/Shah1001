@@ -19,7 +19,9 @@ namespace Optimizer.Models {
             }
         }
 
-        public string Name { get; set; }
+        public string Name {
+            get;
+            set; }
         public string Value { get; set; }
         public string XsdType { get; set; }
         public TreeNode Parent { get; set; }

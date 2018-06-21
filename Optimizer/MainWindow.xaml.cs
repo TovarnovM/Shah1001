@@ -27,7 +27,7 @@ namespace Optimizer {
         public MainWindow() {
             InitializeComponent();
             Just4tst();
-            ChooseAttrXmlView.DataContext = new TreeXMLViewModel(Tm.Tree);           
+            ChooseAttrXmlView.DataContext = new TreeXMLViewModel(Tm.Tree, Tm.VariableAttrs);           
         }
 
         void Just4tst() {

@@ -67,6 +67,9 @@
     <Compile Include="Views\TreeNodeView.xaml.cs">
       <DependentUpon>TreeNodeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VarAttrListItemView.xaml.cs">
+      <DependentUpon>VarAttrListItemView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TreeNodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VarAttrListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
