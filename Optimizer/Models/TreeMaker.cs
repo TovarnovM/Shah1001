@@ -13,6 +13,17 @@ using System.Xml.Schema;
 
 namespace Optimizer.Models {
     public class TreeMaker: NotifyBase {
+        public string ValidMsg { get; private set; }
+        public bool IsValid {
+            get {
+                string msg = "";
+                Doc.Validate(Schema, (o, e1) => {
+                    msg += e1.Message + Environment.NewLine;
+                }, true);
+                ValidMsg = msg == "" ? "Document is valid" : "Document invalid: " + msg;
+                return msg == "";
+            }
+        }
         string IdAttributeName { get; set; } = "optimid";
         HashSet<string> DoubleOptimAttrTypes { get; set; } = new HashSet<string>(new string[] {
             "double",
@@ -39,23 +50,11 @@ namespace Optimizer.Models {
                 throw new ArgumentException("xml Не соответствует схеме: " + ValidMsg);
 
         }
+        #region Tree
         public TreeNode Tree { get; set; }
-        public ObservableCollection<NodeAttribute> VariableAttrs { get; set; } = new ObservableCollection<NodeAttribute>();
 
         public XDocument Doc { get; }
         public XmlSchemaSet Schema { get; }
-
-        public string ValidMsg { get; private set; }
-        public bool IsValid {
-            get {
-                string msg = "";
-                Doc.Validate(Schema, (o, e1) => {
-                    msg += e1.Message + Environment.NewLine;
-                }, true);
-                ValidMsg = msg == "" ? "Document is valid" : "Document invalid: " + msg;
-                return msg == "";
-            }
-        }
 
         public IEnumerable<XElement> GetElements(XElement element) {
             foreach (var xnode in element.Nodes()) {
@@ -79,7 +78,7 @@ namespace Optimizer.Models {
         bool HasAttr(XElement element, string attrName) {
             if (element.HasAttributes) {
                 foreach (var attr in element.Attributes()) {
-                    if(attr.Name.ToString() == attrName) {
+                    if (attr.Name.ToString() == attrName) {
                         return true;
                     }
                 }
@@ -91,14 +90,14 @@ namespace Optimizer.Models {
         public void AddSpecialIDsToDoc() {
             var allXEl = GetElements().ToList();
             var nodes_count = allXEl.Count;
-            while(allXEl.Any(xel => HasAttr(xel, IdAttributeName))) {
+            while (allXEl.Any(xel => HasAttr(xel, IdAttributeName))) {
                 IdAttributeName += "7";
             }
             int id = 0;
             foreach (var xel in allXEl) {
                 AddAttr(xel, IdAttributeName, $"{id++}");
             }
-            
+
 
         }
 
@@ -122,7 +121,7 @@ namespace Optimizer.Models {
                 Element = elem
             };
             foreach (var attr in elem.Attributes()) {
-                
+
                 var si = attr.GetSchemaInfo();
                 if (si == null)
                     continue;
@@ -145,7 +144,11 @@ namespace Optimizer.Models {
                 }
             }
         }
+        #endregion
 
+        #region VarList
+
+        public ObservableCollection<NodeAttribute> VariableAttrs { get; set; } = new ObservableCollection<NodeAttribute>();
         public void CheckUnCheckAttrAction(NodeAttribute changeAttr) {
             if (changeAttr.IsVariate) {
                 if (!VariableAttrs.Contains(changeAttr)) {
@@ -157,7 +160,7 @@ namespace Optimizer.Models {
                 }
             }
         }
-
+        #endregion
         #region TMP
         public string GetDocString() {
             return Doc.Root.ToString();
@@ -216,8 +219,5 @@ namespace Optimizer.Models {
         }        
         
         #endregion
-
-
-
     }
 }

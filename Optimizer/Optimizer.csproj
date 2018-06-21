@@ -57,7 +57,7 @@
     <Compile Include="VievModels\NodeXMLAttrViewModel.cs" />
     <Compile Include="VievModels\NodeXMLViewModel.cs" />
     <Compile Include="VievModels\TreeXMLViewModel.cs" />
-    <Compile Include="VievModels\VariateListViewModel.cs" />
+    <Compile Include="VievModels\VariateListItemViewModel.cs" />
     <Compile Include="Views\ChooseAttrXml.xaml.cs">
       <DependentUpon>ChooseAttrXml.xaml</DependentUpon>
     </Compile>

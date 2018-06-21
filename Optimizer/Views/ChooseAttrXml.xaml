@@ -39,5 +39,9 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
+
+        <ListView Grid.Column="3" Grid.Row="2">
+            
+        </ListView>
     </Grid>
 </UserControl>

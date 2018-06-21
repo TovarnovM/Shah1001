@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Optimizer.VievModels {
     public class TreeXMLViewModel {
         public ReadOnlyCollection<NodeXMLViewModel> Nodes { get; }
+        public ObservableCollection< MyProperty { get; set; }
         public TreeXMLViewModel(TreeNode root) {
             var rootVM = new NodeXMLViewModel(root);
             Nodes = new ReadOnlyCollection<NodeXMLViewModel>(
