@@ -112,7 +112,7 @@ namespace Optimizer.Models {
                 if (xnode is XElement) {
                     ConstructSubTree(xnode as XElement, treeRoot, ValidAttrs);
                 }
-            }
+            } 
             Tree = treeRoot;
             return Tree;
         }
