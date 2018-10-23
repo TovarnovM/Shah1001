@@ -57,7 +57,7 @@
     <Compile Include="VievModels\NodeXMLAttrViewModel.cs" />
     <Compile Include="VievModels\NodeXMLViewModel.cs" />
     <Compile Include="VievModels\TreeXMLViewModel.cs" />
-    <Compile Include="VievModels\VariateListViewModel.cs" />
+    <Compile Include="VievModels\VariateListItemViewModel.cs" />
     <Compile Include="Views\ChooseAttrXml.xaml.cs">
       <DependentUpon>ChooseAttrXml.xaml</DependentUpon>
     </Compile>
@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Views\TreeNodeView.xaml.cs">
       <DependentUpon>TreeNodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VarAttrListItemView.xaml.cs">
+      <DependentUpon>VarAttrListItemView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TreeNodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VarAttrListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

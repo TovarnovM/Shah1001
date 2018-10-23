@@ -10,7 +10,7 @@ namespace Optimizer.VievModels {
     public class NodeXMLViewModel: NotifyBase {
         public TreeNode Node { get; }
         public ReadOnlyCollection<NodeXMLViewModel> Children { get; }
-        public ObservableCollection<NodeXMLAttrViewModel> Attributes { get; }
+        public ObservableCollection<NodeAttribute> Attributes { get; }
         public NodeXMLViewModel Parent { get; }
         private bool _isExpand = true;
 
@@ -38,8 +38,7 @@ namespace Optimizer.VievModels {
                      select new NodeXMLViewModel(child, this))
                      .ToList());
 
-            Attributes = new ObservableCollection<NodeXMLAttrViewModel>(
-                Node.Attrs.Select(attr => new NodeXMLAttrViewModel(attr, this)).ToList());
+            Attributes = node.Attrs;
         }
 
         #endregion // Constructors
