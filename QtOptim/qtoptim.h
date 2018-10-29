@@ -12,4 +12,7 @@ public:
 
 private:
 	Ui::QtOptimClass ui;
+
+private slots:
+	void someslot();
 };
