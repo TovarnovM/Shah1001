@@ -28,19 +28,20 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Header Files\NewFilter1">
+      <UniqueIdentifier>{ad7138b9-794c-4d44-8a5e-ebc196e986d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NewFilter1">
+      <UniqueIdentifier>{1d1eadce-60c9-41cc-9e3a-e6bc765da661}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="qtoptim.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="qtoptim.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="qtoptim.ui">
@@ -51,5 +52,10 @@
     <QtRcc Include="qtoptim.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="qtoptim.h">
+      <Filter>Header Files\NewFilter1</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
