@@ -41,11 +41,14 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="resourses\" />
     <Folder Include="unittests\" />
     <Folder Include="ui\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
+    <Content Include="resourses\settings.xsd" />
+    <Content Include="resourses\some.xml" />
     <Content Include="ui\main_window.ui" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

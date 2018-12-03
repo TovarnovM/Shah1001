@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="windows-1251" standalone="no" ?>
+<conflict:settings xmlns:conflict="conflict" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="conflict file:/D:/conflict2xsd/settings.xsd">
+  <randomizer seed="-1"/>
+  <environment dtime="0.001" time="0" time_limit="0.001" zone_limit="9999999">
+    <weather refraction="1" visibility="1" waves_height="0">
+      <wind_speed x="0" y="0" z="0"/>
+    </weather>
+  </environment>
+  <groups course="0" membership="_black" size="1" slope="0" speed="0" xsi:type="conflict:BattleGroupSample">
+    <center x="0" y="0" z="0"/>
+    <control_center target_outdate="10">
+      <t_distr auto_r_dangers="true" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" free="false" id="0" is_prototype="false" mass="0" membership="_unknown" name="r1" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="4" aero_heating="7" brightness="6" contrast="5" cross_section="7" radio_intensity="8" temperature="21"/>
+      <motion xsi:type="conflict:MotionSimple"/>
+      <power_plant body_mass="4" consumption="0" mass="0" power="0">
+        <engines_v body_mass="1" consumption="0" fuel_mass="10" mass="0" power="0" state="_off" xsi:type="conflict:EngineConstSpeed"/>
+      </power_plant>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <ny_filter T="1" xsi:type="conflict:AperiodicFilter" y="0"/>
+        <nz_filter T="1" xsi:type="conflict:AperiodicFilter" y="0"/>
+        <limit_ny max="13" min="3"/>
+        <limit_nz max="10" min="2"/>
+      </glider>
+      <cpu/>
+      <head distance="10000" friend_detection="true" target_type="_small_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="20" min="1"/>
+        <phi_v max="20" min="0"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <mass_ch mass="10" xt="0.5"/>
+      <aiming_point x="1" y="0" z="0"/>
+      <warhead explode_chance="1" explode_radius="5" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="600.001" xsi:type="conflict:DestructionFactorLifeTime"/>
+      </selfdestruction>
+    </prototype>
+    <order capacity="1" interval="10" xsi:type="conflict:BattleOrderLine"/>
+  </groups>
+  <groups course="0" membership="_blue" size="3" slope="0" speed="10" xsi:type="conflict:BattleGroupSample">
+    <center x="1000" y="0" z="0"/>
+    <control_center target_outdate="10">
+      <t_distr auto_r_dangers="true" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" free="false" id="0" is_prototype="false" membership="_unknown" name="car1" type="_other" xsi:type="conflict:Car">
+      <physics_state acoustic_noise="5" aero_heating="3" brightness="5" contrast="5" cross_section="7" radio_intensity="5" temperature="5"/>
+    </prototype>
+    <order capacity="1" interval="10" xsi:type="conflict:BattleOrderColumn"/>
+  </groups>
+</conflict:settings>

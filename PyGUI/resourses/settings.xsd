@@ -1,0 +1,2435 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:xse="http://www.codesynthesis.com/xmlns/xml-schema-extension"
+			xmlns:conflict="conflict"
+			targetNamespace="conflict">
+
+
+<!--	1. Управление сериализацией из xsd файла:
+	- указывает сериализатору не добавлять данное поле в файл результатов;
+
+		<xsd:annotation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam trancatedInResult="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+
+
+	- указывает сериализатору добавлять данное поле в файл результатов только при первой записи;
+
+		<xsd:annotation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam staticInResult="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+
+	- говорит генератору, что это поле должно храниться в классах как объект, а не как указатель,
+	т.к. его никто не наследует;
+
+		<xsd:annotation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+
+	- говорит генератору не создавать форму для этого элемента
+
+		<xsd:annotation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<dialog>
+					<listViewElement show = "False"/>
+				</dialog>
+			</xsd:appinfo>
+		</xsd:annotation>
+
+		<xsd:annotation>
+			<xsd:documentation>	</xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<dialog show = "False"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+
+-->
+
+
+	<xsd:simpleType name="exPositiveInt">
+		<xsd:annotation>
+			<xsd:documentation> Положительное целое число (>0) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:unsignedInt">
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="incPositiveDouble">
+		<xsd:annotation>
+			<xsd:documentation> Положительное число с плавающей точкой (>=0) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:double">
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="exPositiveDouble">
+		<xsd:annotation>
+			<xsd:documentation> Положительное число с плавающей точкой (>0) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:double">
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="DataFileName">
+		<xsd:annotation>
+			<xsd:documentation> Имя файла с ихсдоными данными </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam fileDialog="*.dat"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="DynamicLibraryName">
+		<xsd:annotation>
+			<xsd:documentation> Имя dll файла модели </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam fileDialog="*.dll"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="Percent">
+		<xsd:annotation>
+			<xsd:documentation> Процентное соотношение [0;1] </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:double">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="Membership">
+		<xsd:annotation>
+			<xsd:documentation> Сторона конфликта </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="_unknown">
+				<xsd:annotation>
+					<xsd:documentation> Неопределено </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_black">
+				<xsd:annotation>
+					<xsd:documentation> Черные </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_blue">
+				<xsd:annotation>
+					<xsd:documentation> Синие </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_brown">
+				<xsd:annotation>
+					<xsd:documentation> Коричневые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_crimson">
+				<xsd:annotation>
+					<xsd:documentation> Малиновые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_cyan">
+				<xsd:annotation>
+					<xsd:documentation> Голубые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_grape">
+				<xsd:annotation>
+					<xsd:documentation> Виноградные </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_green">
+				<xsd:annotation>
+					<xsd:documentation> Зеленые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_grey">
+				<xsd:annotation>
+					<xsd:documentation> Серые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_khaki">
+				<xsd:annotation>
+					<xsd:documentation> Хаки </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_magenta">
+				<xsd:annotation>
+					<xsd:documentation> Пурпурные </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_orange">
+				<xsd:annotation>
+					<xsd:documentation> Оранжевые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_pink">
+				<xsd:annotation>
+					<xsd:documentation> Розовые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_plum">
+				<xsd:annotation>
+					<xsd:documentation> Сливовые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_purple">
+				<xsd:annotation>
+					<xsd:documentation> Багровые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_red">
+				<xsd:annotation>
+					<xsd:documentation> Красные </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_violet">
+				<xsd:annotation>
+					<xsd:documentation> Фиолетовые </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_white">
+				<xsd:annotation>
+					<xsd:documentation> Белый </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_yellow">
+				<xsd:annotation>
+					<xsd:documentation> Желтый </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="EngineState">
+		<xsd:annotation>
+			<xsd:documentation> Состояние двигателя </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="_off"/>
+			<xsd:enumeration value="_burn"/>
+			<xsd:enumeration value="_empty"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="ObjectType">
+		<xsd:annotation>
+			<xsd:documentation> Тип объекта </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="_big_missile">
+				<xsd:annotation>
+					<xsd:documentation> Крупная ракета </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_small_missile">
+				<xsd:annotation>
+					<xsd:documentation> Малая ракета </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_fighter">
+				<xsd:annotation>
+					<xsd:documentation> Истребитель </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_bomber">
+				<xsd:annotation>
+					<xsd:documentation> Бомбардировщик </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_big_ship">
+				<xsd:annotation>
+					<xsd:documentation> Большой корабль </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_small_ship">
+				<xsd:annotation>
+					<xsd:documentation> Малый корабль </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_aerocarrier">
+				<xsd:annotation>
+					<xsd:documentation> Авианосец </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="_other">
+				<xsd:annotation>
+					<xsd:documentation> Прочее </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+
+	<xsd:complexType name="Limits">
+		<xsd:annotation>
+			<xsd:documentation> Диапазон значений </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="min" type="xsd:double" default="0"/>
+		<xsd:attribute name="max" type="xsd:double" default="0"/>
+	</xsd:complexType>
+
+
+
+	<xsd:attributeGroup name="RCoord">
+		<xsd:attribute name="x" type="xsd:double" default="0"/>
+		<xsd:attribute name="y" type="xsd:double" default="0"/>
+		<xsd:attribute name="z" type="xsd:double" default="0"/>
+	</xsd:attributeGroup>
+
+
+
+	<xsd:attributeGroup name="SCoord">
+		<xsd:attribute name="d" type="xsd:double" use="required"/>
+		<xsd:attribute name="p" type="xsd:double" use="required"/>
+		<xsd:attribute name="t" type="xsd:double" use="required"/>
+	</xsd:attributeGroup>
+
+
+
+	<xsd:attributeGroup name="CCoord">
+		<xsd:attribute name="r" type="xsd:double" use="required"/>
+		<xsd:attribute name="p" type="xsd:double" use="required"/>
+		<xsd:attribute name="h" type="xsd:double" use="required"/>
+	</xsd:attributeGroup>
+
+
+
+	<xsd:complexType name="RVector">
+		<xsd:annotation>
+			<xsd:documentation> Вектор в Декартовой СК </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attributeGroup ref="conflict:RCoord"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Speed">
+		<xsd:annotation>
+			<xsd:documentation> Вектор скорости </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attributeGroup ref="conflict:RCoord"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Position">
+		<xsd:annotation>
+			<xsd:documentation> Вектор положения </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attributeGroup ref="conflict:RCoord"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Orientation">
+		<xsd:annotation>
+			<xsd:documentation> Ориентация объекта </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="g" type="xsd:double" default="0"/>
+		<xsd:attribute name="p" type="xsd:double" default="0"/>
+		<xsd:attribute name="t" type="xsd:double" default="0"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="State">
+		<xsd:annotation>
+			<xsd:documentation> Состояние объекта </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="speed" type="conflict:Speed" minOccurs="0"/>
+			<xsd:element name="position" type="conflict:Position" minOccurs="0"/>
+			<xsd:element name="orientation" type="conflict:Orientation" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:group name="Statable">
+		<xsd:annotation>
+			<xsd:documentation> Возможность хранить состояние </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="global_state" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Состояние в земной СК </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="local_state" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Состояние в местной СК </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+
+
+
+	<xsd:complexType name="MassParameters">
+		<xsd:annotation>
+			<xsd:documentation> Пара значений масса/положение ц.м. </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Масса объекта, кг </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="xt" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Положение центра масс, м </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Physical">
+		<xsd:annotation>
+			<xsd:documentation> Физические характеристики объекта. (Вспомогательный класс) </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="temperature" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> температура объекта </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="radio_intensity" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> интенсивность радио излучения </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="contrast" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> контраст излучения </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="cross_section" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> ЭПР </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="brightness" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> яркость </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="aero_heating" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> аэродинамический нагрев </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="acoustic_noise" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> акустический шум </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Unit" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Еденица вооружения, участвующая в конфликте </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="conflict:Statable"/>
+			<xsd:element name="physics_state" type="conflict:Physical" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Физическое состояние объекта </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:unsignedInt" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Идентификатор объекта </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="is_prototype" type="xsd:boolean" default="false">
+			<xsd:annotation>
+				<xsd:documentation> Идентификатор объекта-прототипа </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string" default="">
+			<xsd:annotation>
+				<xsd:documentation> Имя объекта	 </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="membership" type="conflict:Membership" default="_unknown">
+			<xsd:annotation>
+				<xsd:documentation> принадлежность к группировке </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="exploded" type="xsd:boolean" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Признак уничтожения объекта	 </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="free" type="xsd:boolean" default="false">
+			<xsd:annotation>
+				<xsd:documentation> Признак перехода в Environment </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="type" type="conflict:ObjectType" default="_other">
+			<xsd:annotation>
+				<xsd:documentation> Тип объекта	 </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+
+	<xsd:complexType name="DynamicFilter" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый класс динамического звена для имитации работы ССт </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="y" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Выходной сигнал </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AperiodicFilter" >
+		<xsd:annotation>
+			<xsd:documentation> Апериодический фильтр для имитации ССт </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DynamicFilter">
+				<xsd:attribute name="T" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Постоянная времени звена </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="OscillationFilter">
+		<xsd:annotation>
+			<xsd:documentation> Колебательный фильтр для имитации ССт </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DynamicFilter">
+				<xsd:attribute name="T" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Постоянная времени звена </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="Ksi" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Декремент затухания </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+
+	<xsd:complexType name="Glider" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Абстрактный базовый класс для расчета параметров аэродинамики </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Fa" type="conflict:RVector" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Вектор аэродинамических сил </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="M" type="conflict:RVector" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Вектор аэродинамических моментов </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ny_filter" type="conflict:DynamicFilter" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Динамическое звено - имитация ССт по ny </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="nz_filter" type="conflict:DynamicFilter" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Динамическое звено - имитация ССт по nz </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="alpha" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Угол атаки [рад] </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="beta" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Угол скольжения [рад] </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="GliderSimple">
+		<xsd:annotation>
+			<xsd:documentation> Модель АДХ для расчета сил без расчета углов. Обеспечивает v=const </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Glider">
+				<xsd:sequence>
+					<xsd:element name="limit_ny" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Ограничение вертикальной перегрузки </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<genParam trancatedInResult="True"/>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="limit_nz" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Ограничение боковой перегрузки </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<genParam trancatedInResult="True"/>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="GliderBalancingPolars">
+		<xsd:annotation>
+			<xsd:documentation> Класс рассчета параметров аэродинамики, реализованный через балансировочные поляры </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Glider">
+				<xsd:attribute name="data_files_name" type="conflict:DataFileName" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Имя файла с данными для инициализации модели АДХ </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam staticInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="GliderLinearizedParameter">
+		<xsd:annotation>
+			<xsd:documentation> Описание аэродинамического коэффициента в линеаризованном виде </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="mach" type="xsd:double" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Число Маха, для которого приведены коэффициенты </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="null" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Собственный коэффициент, при нуле остальных параметров </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_alpha" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по углу атаки, град </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_beta" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по углу скольжения, град </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_delta_v" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по углу отклонения рулей высоты, град </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_delta_n" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по углу отклонения рулей направления, град </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_delta_e" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по углу отклонения рулей элеронов, град </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_wx" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по угловой скорости крена, град/сек </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_wy" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по угловой скорости рысканья, град/сек </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="by_wz" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Производная коэффициента по угловой скорости тангажа, град/сек </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="GliderLinearized">
+		<xsd:annotation>
+			<xsd:documentation> Класс расчета параметров аэродинамики в линеаризованном виде </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Glider">
+				<xsd:sequence>
+					<xsd:element name="cx" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента лобового сопростивления </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="cy" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента подъемной силы </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="cz" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента перерезывающей силы </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="mx" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента вращения по крену </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="my" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента вращения по рысканью </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="mz" type="conflict:GliderLinearizedParameter" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Производные коэффициента вращения по тангажу </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Engine" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Ракетный двигатель </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="state" type="conflict:EngineState" default="_off">
+			<xsd:annotation>
+				<xsd:documentation> Состояние двигателя </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="power" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Тяга двигателя </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="consumption" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Мгновенный расход </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> текущее значение массы </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="fuel_mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Масса топлива </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="body_mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Масса корпуса </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="EngineSolidPropellant">
+		<xsd:annotation>
+			<xsd:documentation> Твердотопливный ракетный двигатель </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Engine">
+				<xsd:attribute name="full_impulse" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Удельный импульс двигателя </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="duration" type="conflict:exPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Прожолжительность работы </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="EngineConstSpeed">
+		<xsd:annotation>
+			<xsd:documentation> Модель двигателя для поддержания постоянной скорости </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Engine">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="PowerPlant">
+		<xsd:annotation>
+			<xsd:documentation> Силовая установка </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="engines_v" type="conflict:Engine" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Вектор двигателей </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="power" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Тяга двигателя </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="consumption" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Мгновенный расход </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> текущее значение массы </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="body_mass" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Масса корпуса </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Steering">
+		<xsd:annotation>
+			<xsd:documentation> Рулевое управления. Эквивалентные рули </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<dialog>
+					<listViewElement show = "False"/>
+				</dialog>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="delta_v" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Рули высоты </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="delta_n" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Рули направления </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="delta_e" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Рули элеронов </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- CONTROL ALGORITHMS SPECIFICATION -->
+
+
+	<xsd:complexType name="ControlAlgorithm" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый абстрактный алгоритм управления </xsd:documentation>
+		</xsd:annotation>
+	</xsd:complexType>
+
+	<!--			Base algorithms abstract classes of all types -->
+
+	<xsd:complexType name="AlgorithmLateralGload" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый алгоритм наведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:ControlAlgorithm"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AlgorithmLongitudinalGload" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый алгоритм наведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:ControlAlgorithm"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AlgorithmHoming" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый алгоритм наведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:ControlAlgorithm">
+				<xsd:attribute name="d_homing" type="conflict:incPositiveDouble">
+					<xsd:annotation>
+						<xsd:documentation> Дальность до точки прицеливания, на которой начинается наведение  </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<!--			Algorithm realization -->
+
+	<xsd:complexType name="AlgorithmProportionalHoming">
+		<xsd:annotation>
+			<xsd:documentation> Алгоритм пропорционального наведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:AlgorithmHoming">
+				<xsd:sequence>
+					<xsd:element name="limit_ny" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Ограничение вертикальной перегрузки </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<genParam trancatedInResult="True"/>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="limit_nz" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Ограничение боковой перегрузки </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<genParam trancatedInResult="True"/>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="k_phi_v" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> коэффициент по вертикальному углу пеленга  </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="k_phi_h" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> коэффициент по горизонтальному углу пеленга	 </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="k_om_v" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> коэффициент по вертикальной угловой скорости линии визирования	</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="k_om_h" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> коэффициент по горизонтальной угловой скорости линии визирования </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="AlgorithmEngineStart">
+		<xsd:annotation>
+			<xsd:documentation> Алгоритм запуска двигателя </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:ControlAlgorithm">
+				<xsd:sequence>
+					<xsd:element name="times" type="conflict:incPositiveDouble" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="AlgorithmLateralGloadUniversal">
+		<xsd:annotation>
+			<xsd:documentation> Универсальный алгоритм расчета бок. перегрузки </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:AlgorithmLateralGload">
+				<xsd:attribute name="nz_max" type="conflict:exPositiveDouble" default="100">
+					<xsd:annotation>
+						<xsd:documentation> Максимальное значение бок.перегрузки </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="AlgorithmLongitudinalGloadUniversal">
+		<xsd:annotation>
+			<xsd:documentation> Универсальный алгоритм расчета верт. перегрузки </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:AlgorithmLongitudinalGload">
+				<xsd:attribute name="ny_max" type="conflict:exPositiveDouble" default="100">
+					<xsd:annotation>
+						<xsd:documentation> Максимальное значение верт.перегрузки </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="h_stab" type="conflict:exPositiveDouble" default="20">
+					<xsd:annotation>
+						<xsd:documentation> Высота марщевого полета </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="abs_diving_1" type="conflict:exPositiveDouble" default="15">
+					<xsd:annotation>
+						<xsd:documentation> Угол выхода на заданную высоту </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="abs_diving_2" type="conflict:exPositiveDouble" default="15">
+					<xsd:annotation>
+						<xsd:documentation> Угол подхода к цели </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<!-- CONTROL ALGORITHMS SPECIFICATION END -->
+
+	<!--
+	<xsd:complexType name="EngineCommand">
+		<xsd:annotation>
+			<xsd:documentation> Команда на запуск/сброс двигателя </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="exec" type="xsd:boolean" default="false">
+			<xsd:annotation>
+				<xsd:documentation> признак выполнить команду </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="number" type="xsd:unsignedInt" default="0">
+			<xsd:annotation>
+				<xsd:documentation> номер поджигаемого двигателя, начиная с 0 </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="DataBus">
+		<xsd:annotation>
+			<xsd:documentation> Шина обмена данными </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="fire_command" type="conflict:EngineCommand" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Команда на старт двигателя </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="drop_command" type="conflict:EngineCommand" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Команда на сброс двигателя </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="aiming_point" type="conflict:RVector" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Точка прицеливания </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="target" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Обнаруженная цель </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ny_req" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Заданная вертикальная перегрузка </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="nz_req" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Заданная боковая перегрузка </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="gamma_req" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Заданный угол крена </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="has_target" type="xsd:boolean" default="false">
+			<xsd:annotation>
+				<xsd:documentation> Признак захвата цели </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="target_lost" type="xsd:boolean" default="false">
+			<xsd:annotation>
+				<xsd:documentation> Признак потери цели </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	-->
+
+
+	<xsd:complexType name="CentralComputer">
+		<xsd:annotation>
+			<xsd:documentation> Бортовой цифровой вычислитель </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="algorithms_v" type="conflict:ControlAlgorithm" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Вектор алгоритмов управления </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<!--  HOMING HEADS	-->
+
+
+	<xsd:complexType name="HomingHead" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Абстрактный класс головки самонаведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="friend_detection" type="xsd:boolean">
+			<xsd:annotation>
+				<xsd:documentation> Возможность определять свой/чужой </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+
+	<xsd:complexType name="HomingHeadSimple">
+		<xsd:annotation>
+			<xsd:documentation> Базовая модель головки самоноведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:HomingHead">
+				<xsd:sequence>
+					<xsd:element name="phi_h" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Диапазон горизонтального угла прокачки, град </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="phi_v" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Диапазон вертикального угла прокачки, град </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="distance" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Дальность видимости ГСН </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="target_type" type="conflict:ObjectType" default="_other">
+					<xsd:annotation>
+						<xsd:documentation> Тип искомой цели </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="HomingHeadInfrared">
+		<xsd:annotation>
+			<xsd:documentation> Инфракрасная головка самоноведения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:HomingHead">
+				<xsd:sequence>
+					<xsd:element name="phi_h" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Диапазон горизонтального угла прокачки </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="phi_v" type="conflict:Limits">
+						<xsd:annotation>
+							<xsd:documentation> Диапазон вертикального угла прокачки </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="front_distance" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Дальность при фронтальном наблюдении </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="bottom_distance" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Дальность при тыловом наблюдении </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<!--  HOMING HEADS	END	 -->
+
+
+
+	<!--  RADARS  -->
+
+	<xsd:complexType name="Radar" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый класс для всех радаров </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="conflict:Statable"/>
+		</xsd:sequence>
+		<xsd:attribute name = "scan_freq" type = "conflict:exPositiveDouble" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Частота сканирования пространства (Гц) </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="RadarSimple">
+		<xsd:annotation>
+			<xsd:documentation> Простая модель радара. Ищет цели с заданной частотой в заданном радиусе </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Radar">
+				<xsd:attribute name = "vision_radius" type = "conflict:exPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Радиус обнаружения цели (м) </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="RadarInfrared">
+		<xsd:annotation>
+			<xsd:documentation> Тепловизионный радар </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Radar">
+				<xsd:attribute name="front_distance" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Дальность при фронтальном наблюдении </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="bottom_distance" type="conflict:incPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Дальность при тыловом наблюдении </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--  RADARS END  -->
+
+
+	<!--  MEASURERS -->
+
+	<xsd:complexType name="Measurer" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Абстрактный тип измерителя </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="measured_state" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Измеренное состояние объекта </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="StrapDownInertialNavigationsSystem">
+		<xsd:annotation>
+			<xsd:documentation> БИНС </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Measurer">
+				<xsd:sequence>
+					<xsd:element name="a0" type="conflict:RVector" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> ошибка выставки ДЛУ (м/с^2) </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="w0" type="conflict:RVector" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> дрейф ДУС (рад/с) </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--  MEASURERS END-->
+
+
+
+	<!--  SELF DESTRUCTION -->
+	<xsd:complexType name="DestructionFactor" abstract = "true">
+		<xsd:annotation>
+			<xsd:documentation> Класс интерфейс для всех факторов самоликвидации </xsd:documentation>
+		</xsd:annotation>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="DestructionFactorLifeTime">
+		<xsd:annotation>
+			<xsd:documentation> Самоликвидация по продолжительности автономного существования </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DestructionFactor">
+				<xsd:attribute name="max_time" type="conflict:exPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Максимальная продолжитительность автономного существования (сек) </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="DestructionFactorDistance">
+		<xsd:annotation>
+			<xsd:documentation> Самоликвидация по максимальному перемещению </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DestructionFactor">
+				<xsd:attribute name="max_distance" type="conflict:exPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Максимальная дальность движения (м) </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="DestructionFactorLostTarget">
+		<xsd:annotation>
+			<xsd:documentation> Самоликвидация при отсутствии повторного завхвата цели </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DestructionFactor">
+				<xsd:attribute name="max_time" type="conflict:exPositiveDouble" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Максимальное ожидание повторного захвата (с) </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="SelfDestructionAlgorithm">
+		<xsd:annotation>
+			<xsd:documentation> Алгоритм самоликвидации </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="factors" type="conflict:DestructionFactor" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Список факторов для ликвидации </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!--  SELF DESTRUCTION -->
+
+
+	<xsd:complexType name="ComplexationsAlgorithm">
+		<xsd:annotation>
+			<xsd:documentation> Алгоритм комплексаирования информации датчиков </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="measured_state" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Комплексированное состояние объекта </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="MeasuringSystem">
+		<xsd:annotation>
+			<xsd:documentation> Система измерения состояния объекта </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="measurers_v" type="conflict:Measurer" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Набор датчиков </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="measured_state" type="conflict:State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Измеренное состояние объекта </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="complex_alg" type="conflict:ComplexationsAlgorithm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Алгоритм комплексирования </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="DangerFactor" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Абстрактный фактор опасности </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="relative_danger" type="conflict:exPositiveInt" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Относительная опасность </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="FlyinTimeDF">
+		<xsd:annotation>
+			<xsd:documentation> Фактор опасности подлетное время </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DangerFactor"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="TargetHeightDF">
+		<xsd:annotation>
+			<xsd:documentation> Фактор опасности высота </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DangerFactor"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="TargetDistanceDF">
+		<xsd:annotation>
+			<xsd:documentation> Фактор опасности дальность </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DangerFactor"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="CurrentMissDF">
+		<xsd:annotation>
+			<xsd:documentation> Фактор опасности текущий промах </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:DangerFactor"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<!--xsd:complexType name="DangerFactors">
+		<xsd:annotation>
+			<xsd:documentation> Вектор ранжирования опасностей цели </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="d_factor" type="conflict:DangerFactor" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Фактор опасности </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType-->
+
+
+
+	<xsd:complexType name="TargetDistribution" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Распределение целей </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="danger_factors" type="conflict:DangerFactor" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> ранжирование критерия опасности </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="auto_r_dangers" type="xsd:boolean" default="false"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="SaatiTD">
+		<xsd:annotation>
+			<xsd:documentation> Алгоритм ранжирования целей Саати </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:TargetDistribution"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="ControlCenter">
+		<xsd:annotation>
+			<xsd:documentation> Командный пункт </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="t_distr" type="conflict:TargetDistribution">
+				<xsd:annotation>
+					<xsd:documentation> Целераспределение </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="target_outdate" type="conflict:exPositiveDouble" default="10">
+			<xsd:annotation>
+				<xsd:documentation> Время для принятия решения об устаревании цели, сек </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Weather">
+		<xsd:annotation>
+			<xsd:documentation> Погодные условия </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="wind_speed" type="conflict:RVector">
+				<xsd:annotation>
+					<xsd:documentation> Скорость ветра </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="visibility" type="conflict:Percent" default="1">
+			<xsd:annotation>
+				<xsd:documentation> Видимость [0;1] </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="refraction" type="conflict:Percent" default="1">
+			<xsd:annotation>
+				<xsd:documentation> Преломление [0;1] </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="waves_height" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Высота волн </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Warhead">
+		<xsd:annotation>
+			<xsd:documentation> Модель боевой части </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="explode_radius" type="conflict:incPositiveDouble" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Радиус подрыва цели </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="explode_chance" type="conflict:Percent" default="1">
+			<xsd:annotation>
+				<xsd:documentation> Вероятность подрыва цели [0;1] </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="friendly_fire" type="xsd:boolean" default="true">
+			<xsd:annotation>
+				<xsd:documentation> Возможность поражения союзников при близком подрыве </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+
+
+
+	<xsd:complexType name="Motion" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Уравнения движения. Базовый тип </xsd:documentation>
+		</xsd:annotation>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name = "MotionLoadable">
+		<xsd:annotation>
+			<xsd:documentation> Движение, загружаемое из файла </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Motion">
+				<xsd:attribute name="fname" type="conflict:DataFileName" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Файл с траекторией </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name = "MotionBalancing">
+		<xsd:annotation>
+			<xsd:documentation> Движение в балансировочном режиме </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Motion">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name = "MotionSimple">
+		<xsd:annotation>
+			<xsd:documentation> Движение с постоянной скоростью, без учета двигателя </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Motion">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name = "Missile">
+		<xsd:annotation>
+			<xsd:documentation> Ракета </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<treeView icon = ":/conflicttreeview/images/missile.png"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Unit">
+				<xsd:sequence>
+					<xsd:element name="motion" type="conflict:Motion">
+						<xsd:annotation>
+							<xsd:documentation> Уравнения движения </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="power_plant" type="conflict:PowerPlant">
+						<xsd:annotation>
+							<xsd:documentation> Двигательная установка </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="glider" type="conflict:Glider">
+						<xsd:annotation>
+							<xsd:documentation> Модель аэродинамики </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="cpu" type="conflict:CentralComputer">
+						<xsd:annotation>
+							<xsd:documentation> БЦВМ </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="steering" type="conflict:Steering">
+						<xsd:annotation>
+							<xsd:documentation> Рулевое управление </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="head" type="conflict:HomingHead" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation> ГСН </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="sensors" type="conflict:MeasuringSystem">
+						<xsd:annotation>
+							<xsd:documentation> Модель ошибок измерительной системы </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="mass_ch" type="conflict:MassParameters" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> МЦХ объекта </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+									<genParam trancatedInResult="True"/>
+								</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="aiming_point" type="conflict:RVector">
+						<xsd:annotation>
+							<xsd:documentation> Точка прицеливания </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="warhead" type="conflict:Warhead">
+						<xsd:annotation>
+							<xsd:documentation> Боеголовка </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="selfdestruction" type="conflict:SelfDestructionAlgorithm">
+						<xsd:annotation>
+							<xsd:documentation> Алгоритм самоликвидации </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="mass" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> текущее значение массы </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<dialog show = "False"/>
+							</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="xt" type="xsd:double" default="0">
+					<xsd:annotation>
+						<xsd:documentation> текущее положение ц.м. </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<dialog show = "False"/>
+							</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="self_mass" type="conflict:exPositiveDouble" default="0.01">
+					<xsd:annotation>
+						<xsd:documentation> Масса ракеты (без двигателя) </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="self_xt" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> Положение ц.м. без двигателя </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<!--xsd:complexType name="MissileImported">
+		<xsd:annotation>
+			<xsd:documentation> Импортируемая модель ракеты </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Unit">
+				<xsd:sequence>
+					<xsd:element name="dll_name" type="conflict:DynamicLibraryName">
+						<xsd:annotation>
+							<xsd:documentation> Имя dll модели ракеты </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType-->
+
+
+
+	<xsd:complexType name="Zone">
+		<xsd:annotation>
+			<xsd:documentation> Зона </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="radius" type="xsd:double" use="required"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="HitProbability">
+		<xsd:annotation>
+			<xsd:documentation> Вероятность попадания по данному типу </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="target_type" type="conflict:ObjectType" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Тип цели </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="value" type="xsd:double" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Вероятность попадания </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="HitProbabilities">
+		<xsd:annotation>
+			<xsd:documentation> Вектор вероятностей попадания для всех типов </xsd:documentation>
+			<xsd:appinfo source="Xsd2CppGen">
+				<genParam noInheritance="True"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:attribute name="other" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения остальных типов, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="big_missile" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения большой ракеты, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="small_missile" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения малой ракеты, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="bomber" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения бомбардировщика, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="fighter" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения истребителя, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="big_ship" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения большого корабля, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="small_ship" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения малого корабля, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="aerocarrier" type="conflict:Percent">
+			<xsd:annotation> <xsd:documentation> Вероятность поражения авианосца, [0-1] </xsd:documentation> </xsd:annotation>
+		</xsd:attribute>
+		<!--xsd:sequence>
+			<count of TargetType values >
+			<xsd:element name="hit_probability" type="conflict:HitProbability" minOccurs="8" maxOccurs="8"/>
+		</xsd:sequence-->
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="FiringChannel">
+		<xsd:annotation>
+			<xsd:documentation> Стрельбовой канал </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="conflict:Statable"/>
+			<xsd:element name="noescape_zone" type="conflict:Zone">
+				<xsd:annotation>
+					<xsd:documentation> Зона поражения </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<genParam trancatedInResult="True"/>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="hit_probabilities" type="conflict:HitProbabilities">
+				<xsd:annotation>
+					<xsd:documentation> Веротяности поражения всех типов целей </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="reload_time" type="conflict:incPositiveDouble" default="15.0">
+			<xsd:annotation>
+				<xsd:documentation> Время для перезаряда боеукладки </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="volley_size" type="conflict:exPositiveDouble" default="1">
+			<xsd:annotation>
+				<xsd:documentation> Число снарядов на одну цель </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="delay" type="conflict:incPositiveDouble" default="5.0">
+			<xsd:annotation>
+				<xsd:documentation> Задержка между стрельбами </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="acceleration" type="conflict:incPositiveDouble" default="50">
+			<xsd:annotation>
+				<xsd:documentation> Скорость вылета снаряда </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Ammunition">
+		<xsd:annotation>
+			<xsd:documentation> Модель боеукладки </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="prototype" type="conflict:Missile">
+				<xsd:annotation>
+					<xsd:documentation> Прототип ракеты из арсенала </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<genParam>
+							<prototype destListName="missiles" global="true"/>
+						</genParam>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="capacity" type="conflict:exPositiveDouble" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Число ракет в арсенале </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="ManPortableAirDefenseSystem">
+		<xsd:annotation>
+			<xsd:documentation> ПЗРК </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Unit">
+				<xsd:sequence>
+					<xsd:element name="visor" type="conflict:Radar">
+						<xsd:annotation>
+							<xsd:documentation> Средство обнаружения </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="firing_channel" type="conflict:FiringChannel">
+						<xsd:annotation>
+							<xsd:documentation> Стрельбовой канал </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ammunition" type="conflict:Ammunition">
+						<xsd:annotation>
+							<xsd:documentation> Арсенал ПЗРК </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Ship">
+		<xsd:annotation>
+			<xsd:documentation> Модель корабля </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Unit">
+				<xsd:sequence>
+					<xsd:element name="firing_channels" type="conflict:FiringChannel" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Стрельбовые каналы </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ammunition" type="conflict:Ammunition">
+						<xsd:annotation>
+							<xsd:documentation> Боекомплект с учетом ракет в стволе </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="radars" type="conflict:Radar" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Модель станции обнаружения </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="control_center" type="conflict:ControlCenter">
+						<xsd:annotation>
+							<xsd:documentation> Локальный пункт управления </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="hits_for_die" type="conflict:exPositiveInt" default="1">
+					<xsd:annotation>
+						<xsd:documentation> Количество попаданий, необходимое для потопления </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="hits_for_break" type="conflict:exPositiveInt" default="1">
+					<xsd:annotation>
+						<xsd:documentation> Количество попаданий, необходимое для выхода из строя основных элементов </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="repair_time" type="conflict:incPositiveDouble" default="180">
+					<xsd:annotation>
+						<xsd:documentation> Время для перезапуска систем после выхода из строя, сек </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="sinking_time" type="conflict:incPositiveDouble" default="0">
+					<xsd:annotation>
+						<xsd:documentation> Время ухода под воду после уничтожения, сек </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<genParam trancatedInResult="True"/>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Car">
+		<xsd:annotation>
+			<xsd:documentation> Модель автомобиля  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:Unit">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+
+	<xsd:complexType name="Environment">
+		<xsd:annotation>
+			<xsd:documentation> Окружающая среда </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="weather" type="conflict:Weather">
+				<xsd:annotation>
+					<xsd:documentation> Модель погодных условий </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		 <xsd:attribute name="time" type="conflict:incPositiveDouble" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Время моделирование </xsd:documentation>
+					<xsd:appinfo source="Xsd2CppGen">
+						<dialog show = "False"/>
+					</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="time_limit" type="conflict:exPositiveDouble" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Ограничение времени моделирования, сек </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="dtime" type="conflict:exPositiveDouble" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Шаг моделирования, сек </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<genParam trancatedInResult="True"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="zone_limit" type="conflict:exPositiveDouble" default="9999999">
+			<xsd:annotation>
+				<xsd:documentation> Радиус ограничивающей полусферы, м </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="Randomizer">
+		<xsd:annotation>
+			<xsd:documentation> Генератор случайных чисел </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="seed" type="xsd:int" default="-1">
+			<xsd:annotation>
+				<xsd:documentation> Зерно генератора. меньше 0 для случайного значения </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<!--		BATTLE ORDERS				-->
+
+
+
+	<xsd:complexType name="BattleOrder" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Базовый класс боевого простроения </xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="capacity" type="conflict:exPositiveInt" default="1">
+			<xsd:annotation>
+				<xsd:documentation> Число объектов в группе </xsd:documentation>
+				<xsd:appinfo source="Xsd2CppGen">
+					<dialog show = "False"/>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="BattleOrderLine">
+		<xsd:annotation>
+			<xsd:documentation> Построение в ряд </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:BattleOrder">
+				<xsd:attribute name="interval" type="conflict:incPositiveDouble">
+					<xsd:annotation>
+						<xsd:documentation> Расстояние между соседними объектами, м </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="BattleOrderColumn">
+		<xsd:annotation>
+			<xsd:documentation> Построение в колонну </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:BattleOrder">
+				<xsd:attribute name="interval" type="conflict:incPositiveDouble">
+					<xsd:annotation>
+						<xsd:documentation> Расстояние между соседними объектами, м </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<!--		BATTLE ORDERS END			-->
+
+
+
+	<xsd:complexType name="BattleGroup" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation> Боевая группа </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="order" type="conflict:BattleOrder">
+				<xsd:annotation>
+					<xsd:documentation> Боевой порядок </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="center" type="conflict:Position">
+				<xsd:annotation>
+					<xsd:documentation> Центр группы </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="control_center" type="conflict:ControlCenter" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> Глобальный пункт управления </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="membership" type="conflict:Membership" use="required">
+			<xsd:annotation>
+				<xsd:documentation> Принадлежность к группе </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="course" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Угол курса группы </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="slope" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Угол наклона траектории группы </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="speed" type="xsd:double" default="0">
+			<xsd:annotation>
+				<xsd:documentation> Скорость движения группы </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="BattleGroupSample">
+		<xsd:annotation>
+			<xsd:documentation> Группа однотипных объектов </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:BattleGroup">
+				<xsd:sequence>
+					<xsd:element name="prototype" type="conflict:Unit">
+						<xsd:annotation>
+							<xsd:documentation> Прототип объектов группы </xsd:documentation>
+							<xsd:appinfo source="Xsd2CppGen">
+								<genParam>
+									<prototype destListName="units" global="true"/>
+								</genParam>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="size" type="conflict:exPositiveInt" use="required">
+					<xsd:annotation>
+						<xsd:documentation> Число объектов в группе </xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="BattleGroupMulti">
+		<xsd:annotation>
+			<xsd:documentation> Группа объектов разного типа </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="conflict:BattleGroup">
+				<xsd:sequence>
+					<xsd:element name="units" type="conflict:Unit" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> Объекты группы </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+	<xsd:complexType name="Settings">
+		<xsd:annotation>
+			<xsd:documentation> Настройки моделирования </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="randomizer" type="conflict:Randomizer">
+				<xsd:annotation>
+					<xsd:documentation> Настройка генератора случайных чисел </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="environment" type="conflict:Environment">
+				<xsd:annotation>
+					<xsd:documentation> Настройка окружающей среды </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="groups" type="conflict:BattleGroup" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Настройка боевых групп </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="units" type="conflict:Unit" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> Вектор, хранящий прототипы клонируемых юнитов </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<dialog show = "False"/>
+						</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="missiles" type="conflict:Missile" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+						<xsd:documentation> Вектор, хранящий прототипы клонируемых ракет </xsd:documentation>
+						<xsd:appinfo source="Xsd2CppGen">
+							<dialog show = "False"/>
+						</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="settings" type="conflict:Settings"/>
+</xsd:schema>

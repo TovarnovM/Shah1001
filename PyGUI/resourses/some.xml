@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="windows-1251" standalone="no" ?>
+<conflict:settings xmlns:conflict="conflict" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="conflict file:/D:/Work/Projects/MathModels/conflict2/data/settings.xsd">
+  <randomizer seed="1"/>
+  <environment dtime="0.01" time="0" time_limit="75" zone_limit="9999999">
+    <weather refraction="1" visibility="1" waves_height="0">
+      <wind_speed x="0" y="0" z="0"/>
+    </weather>
+  </environment>
+  <groups course="0" membership="_red" size="10" speed="140" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="486.52" xsi:type="conflict:BattleOrderLine"/>
+    <center x="-250001.245" y="2000" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" id="0" mass="0" membership="_unknown" name="MASP" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+      <motion xsi:type="conflict:MotionBalancing"/>
+      <power_plant body_mass="0" consumption="0" mass="0" power="0"/>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <limit_ny max="5" min="-5"/>
+        <limit_nz max="3" min="-3"/>
+      </glider>
+      <cpu>
+        <algorithms_v nz_max="3" xsi:type="conflict:AlgorithmLateralGloadUniversal"/>
+        <algorithms_v abs_diving_1="45" abs_diving_2="60" h_stab="12500" ny_max="5" xsi:type="conflict:AlgorithmLongitudinalGloadUniversal"/>
+        <algorithms_v d_homing="35000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+          <limit_ny max="5" min="-5"/>
+          <limit_nz max="3" min="-3"/>
+        </algorithms_v>
+      </cpu>
+      <head distance="25000" friend_detection="true" target_type="_big_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="25" min="-25"/>
+        <phi_v max="30" min="-30"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <aiming_point x="0" y="0" z="0"/>
+      <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="20" xsi:type="conflict:DestructionFactorLostTarget"/>
+      </selfdestruction>
+    </prototype>
+  </groups>
+  <groups course="0" membership="_red" size="10" speed="140" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="501.12" xsi:type="conflict:BattleOrderLine"/>
+    <center x="-240000.01" y="2000" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" id="0" mass="0" membership="_unknown" name="MASP" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+      <motion xsi:type="conflict:MotionBalancing"/>
+      <power_plant body_mass="0" consumption="0" mass="0" power="0"/>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <limit_ny max="5" min="-5"/>
+        <limit_nz max="3" min="-3"/>
+      </glider>
+      <cpu>
+        <algorithms_v nz_max="3" xsi:type="conflict:AlgorithmLateralGloadUniversal"/>
+        <algorithms_v abs_diving_1="45" abs_diving_2="60" h_stab="12500" ny_max="5" xsi:type="conflict:AlgorithmLongitudinalGloadUniversal"/>
+        <algorithms_v d_homing="35000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+          <limit_ny max="5" min="-5"/>
+          <limit_nz max="3" min="-3"/>
+        </algorithms_v>
+      </cpu>
+      <head distance="25000" friend_detection="true" target_type="_big_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="25" min="-25"/>
+        <phi_v max="30" min="-30"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <aiming_point x="0" y="0" z="0"/>
+      <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="20" xsi:type="conflict:DestructionFactorLostTarget"/>
+      </selfdestruction>
+    </prototype>
+  </groups>
+  <groups course="0" membership="_red" size="10" speed="140" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="503.78" xsi:type="conflict:BattleOrderLine"/>
+    <center x="-230001.22" y="2000" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" id="0" mass="0" membership="_unknown" name="MASP" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+      <motion xsi:type="conflict:MotionBalancing"/>
+      <power_plant body_mass="0" consumption="0" mass="0" power="0"/>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <limit_ny max="5" min="-5"/>
+        <limit_nz max="3" min="-3"/>
+      </glider>
+      <cpu>
+        <algorithms_v nz_max="3" xsi:type="conflict:AlgorithmLateralGloadUniversal"/>
+        <algorithms_v abs_diving_1="45" abs_diving_2="60" h_stab="12500" ny_max="5" xsi:type="conflict:AlgorithmLongitudinalGloadUniversal"/>
+        <algorithms_v d_homing="35000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+          <limit_ny max="5" min="-5"/>
+          <limit_nz max="3" min="-3"/>
+        </algorithms_v>
+      </cpu>
+      <head distance="25000" friend_detection="true" target_type="_big_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="25" min="-25"/>
+        <phi_v max="30" min="-30"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <aiming_point x="0" y="0" z="0"/>
+      <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="20" xsi:type="conflict:DestructionFactorLostTarget"/>
+      </selfdestruction>
+    </prototype>
+  </groups>
+  <groups course="0" membership="_red" size="10" speed="140" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="499.83" xsi:type="conflict:BattleOrderLine"/>
+    <center x="-220000.78" y="2000" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" id="0" mass="0" membership="_unknown" name="MASP" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+      <motion xsi:type="conflict:MotionBalancing"/>
+      <power_plant body_mass="0" consumption="0" mass="0" power="0"/>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <limit_ny max="5" min="-5"/>
+        <limit_nz max="3" min="-3"/>
+      </glider>
+      <cpu>
+        <algorithms_v nz_max="3" xsi:type="conflict:AlgorithmLateralGloadUniversal"/>
+        <algorithms_v abs_diving_1="45" abs_diving_2="60" h_stab="12500" ny_max="5" xsi:type="conflict:AlgorithmLongitudinalGloadUniversal"/>
+        <algorithms_v d_homing="35000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+          <limit_ny max="5" min="-5"/>
+          <limit_nz max="3" min="-3"/>
+        </algorithms_v>
+      </cpu>
+      <head distance="25000" friend_detection="true" target_type="_big_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="25" min="-25"/>
+        <phi_v max="30" min="-30"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <aiming_point x="0" y="0" z="0"/>
+      <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="20" xsi:type="conflict:DestructionFactorLostTarget"/>
+      </selfdestruction>
+    </prototype>
+  </groups>
+  <groups course="0" membership="_red" size="10" speed="140" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="491.63" xsi:type="conflict:BattleOrderLine"/>
+    <center x="-200000.75" y="2000" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" id="0" mass="0" membership="_unknown" name="MASP" self_mass="0.01" self_xt="0" type="_small_missile" xsi:type="conflict:Missile" xt="0">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+      <motion xsi:type="conflict:MotionBalancing"/>
+      <power_plant body_mass="0" consumption="0" mass="0" power="0"/>
+      <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+        <limit_ny max="5" min="-5"/>
+        <limit_nz max="3" min="-3"/>
+      </glider>
+      <cpu>
+        <algorithms_v nz_max="3" xsi:type="conflict:AlgorithmLateralGloadUniversal"/>
+        <algorithms_v abs_diving_1="45" abs_diving_2="60" h_stab="12500" ny_max="5" xsi:type="conflict:AlgorithmLongitudinalGloadUniversal"/>
+        <algorithms_v d_homing="35000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+          <limit_ny max="5" min="-5"/>
+          <limit_nz max="3" min="-3"/>
+        </algorithms_v>
+      </cpu>
+      <head distance="25000" friend_detection="true" target_type="_big_ship" xsi:type="conflict:HomingHeadSimple">
+        <phi_h max="25" min="-25"/>
+        <phi_v max="30" min="-30"/>
+      </head>
+      <sensors>
+        <complex_alg/>
+      </sensors>
+      <aiming_point x="0" y="0" z="0"/>
+      <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+      <selfdestruction>
+        <factors max_time="20" xsi:type="conflict:DestructionFactorLostTarget"/>
+      </selfdestruction>
+    </prototype>
+  </groups>
+  <groups course="-90" membership="_white" size="7" speed="15" xsi:type="conflict:BattleGroupSample">
+    <order capacity="1" interval="1000" xsi:type="conflict:BattleOrderColumn"/>
+    <center x="0" y="0" z="0"/>
+    <control_center target_outdate="5">
+      <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+        <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+        <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+      </t_distr>
+    </control_center>
+    <prototype exploded="false" hits_for_break="2" hits_for_die="5" id="0" membership="_unknown" name="AdmiralCrusenshtern" repair_time="300" sinking_time="120" type="_big_ship" xsi:type="conflict:Ship">
+      <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="200" radio_intensity="0" temperature="0"/>
+      <firing_channels acceleration="200" delay="0.5" reload_time="50" volley_size="2">
+        <noescape_zone radius="45000"/>
+        <hit_probabilities aerocarrier="0.77" big_missile="0.71" big_ship="0.75" bomber="0.73" fighter="0.74" other="0.6" small_missile="0.72" small_ship="0.76"/>
+      </firing_channels>
+      <firing_channels acceleration="200" delay="0.5" reload_time="50" volley_size="2">
+        <noescape_zone radius="45000"/>
+        <hit_probabilities aerocarrier="0.77" big_missile="0.71" big_ship="0.75" bomber="0.73" fighter="0.74" other="0.6" small_missile="0.72" small_ship="0.76"/>
+      </firing_channels>
+      <firing_channels acceleration="200" delay="0.5" reload_time="50" volley_size="2">
+        <noescape_zone radius="45000"/>
+        <hit_probabilities aerocarrier="0.77" big_missile="0.71" big_ship="0.75" bomber="0.73" fighter="0.74" other="0.6" small_missile="0.72" small_ship="0.76"/>
+      </firing_channels>
+      <firing_channels acceleration="200" delay="0.5" reload_time="50" volley_size="2">
+        <noescape_zone radius="45000"/>
+        <hit_probabilities aerocarrier="0.77" big_missile="0.71" big_ship="0.75" bomber="0.73" fighter="0.74" other="0.6" small_missile="0.72" small_ship="0.76"/>
+      </firing_channels>
+      <ammunition capacity="100">
+        <prototype exploded="false" id="0" mass="0" membership="_unknown" name="RIM66" self_mass="0.01" self_xt="0" type="_other" xt="0">
+          <physics_state acoustic_noise="0" aero_heating="0" brightness="0" contrast="0" cross_section="2" radio_intensity="0" temperature="0"/>
+          <motion xsi:type="conflict:MotionSimple"/>
+          <power_plant body_mass="0" consumption="0" mass="0" power="0">
+            <engines_v body_mass="0" consumption="0" duration="2" fuel_mass="50" full_impulse="40000" mass="0" power="0" state="_off" xsi:type="conflict:EngineSolidPropellant"/>
+          </power_plant>
+          <glider alpha="0" beta="0" xsi:type="conflict:GliderSimple">
+            <limit_ny max="15" min="-15"/>
+            <limit_nz max="15" min="-15"/>
+          </glider>
+          <cpu>
+            <algorithms_v d_homing="100000" k_om_h="3" k_om_v="3" k_phi_h="0.5" k_phi_v="0.5" xsi:type="conflict:AlgorithmProportionalHoming">
+              <limit_ny max="15" min="-15"/>
+              <limit_nz max="13" min="-13"/>
+            </algorithms_v>
+            <algorithms_v xsi:type="conflict:AlgorithmEngineStart">
+              <times>0.1</times>
+            </algorithms_v>
+          </cpu>
+          <sensors>
+            <complex_alg/>
+          </sensors>
+          <aiming_point x="0" y="0" z="0"/>
+          <warhead explode_chance="0.95" explode_radius="25" friendly_fire="true"/>
+          <selfdestruction>
+            <factors max_distance="50000" xsi:type="conflict:DestructionFactorDistance"/>
+          </selfdestruction>
+        </prototype>
+      </ammunition>
+      <radars scan_freq="1" vision_radius="250000" xsi:type="conflict:RadarSimple"/>
+      <control_center target_outdate="5">
+        <t_distr auto_r_dangers="false" xsi:type="conflict:SaatiTD">
+          <danger_factors relative_danger="1" xsi:type="conflict:FlyinTimeDF"/>
+          <danger_factors relative_danger="1" xsi:type="conflict:CurrentMissDF"/>
+          <danger_factors relative_danger="1" xsi:type="conflict:TargetHeightDF"/>
+          <danger_factors relative_danger="1" xsi:type="conflict:TargetDistanceDF"/>
+        </t_distr>
+      </control_center>
+    </prototype>
+  </groups>
+</conflict:settings>
