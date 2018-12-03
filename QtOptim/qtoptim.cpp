@@ -1,5 +1,6 @@
 #include "qtoptim.h"
 #include "rx.hpp"
+#include "DRange.h"
 namespace Rx {
 	using namespace rxcpp;
 	using namespace rxcpp::sources;
@@ -17,5 +18,6 @@ QtOptim::QtOptim(QWidget *parent)
 }
 
 void QtOptim::someslot() {
-	ui.pushButton->setText("wwewe");
+	auto dr = DRange(1, 2, "123");
+	ui.pushButton->setText(dr.name);
 }

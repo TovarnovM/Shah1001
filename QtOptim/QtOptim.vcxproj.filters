@@ -28,11 +28,17 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Header Files\NewFilter1">
+    <Filter Include="Header Files\UI">
       <UniqueIdentifier>{ad7138b9-794c-4d44-8a5e-ebc196e986d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NewFilter1">
+    <Filter Include="Source Files\UI">
       <UniqueIdentifier>{1d1eadce-60c9-41cc-9e3a-e6bc765da661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GA">
+      <UniqueIdentifier>{57d2ab43-de12-4f94-b855-6524ff8de177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GA">
+      <UniqueIdentifier>{be88b0fe-1c93-4109-9110-7481dc0c7eba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +46,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="qtoptim.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DRange.cpp">
+      <Filter>Source Files\GA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qtoptim.h">
-      <Filter>Header Files\NewFilter1</Filter>
+      <Filter>Header Files\UI</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DRange.h">
+      <Filter>Header Files\GA</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
