@@ -12,7 +12,7 @@
     <OutputPath>.</OutputPath>
     <Name>PyGUI</Name>
     <RootNamespace>PyGUI</RootNamespace>
-    <InterpreterId>MSBuild|env_py_gui|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env_py_gui2|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +23,25 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ga\Chromosome.py" />
+    <Compile Include="ga\ExecParallel.py" />
+    <Compile Include="ga\ExecRx.py" />
+    <Compile Include="ga\Generation.py" />
+    <Compile Include="ga\GenerationP.py" />
+    <Compile Include="ga\NameGenerator.py" />
+    <Compile Include="ga\OptiPerson.py" />
+    <Compile Include="ga\OptiRx.py" />
+    <Compile Include="ga\OptiSaver.py" />
+    <Compile Include="ga\OptiSLSQP.py" />
+    <Compile Include="ga\Pauser.py" />
+    <Compile Include="ga\StepUpGenetic.py" />
+    <Compile Include="ga\StepUpGrad.py" />
+    <Compile Include="ga\StepUpSwarm.py" />
+    <Compile Include="ga\SwarmNet.py" />
+    <Compile Include="ga\TestFunctions.py" />
+    <Compile Include="lxml_tst.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PyGUI.py" />
     <Compile Include="ui\MainWindow.py" />
     <Compile Include="unittests\test1.py">
@@ -30,6 +49,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="env_py_gui2\">
+      <Id>env_py_gui2</Id>
+      <Version>3.6</Version>
+      <Description>env_py_gui2 (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env_py_gui\">
       <Id>env_py_gui</Id>
       <Version>3.6</Version>
@@ -41,6 +69,7 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ga\" />
     <Folder Include="resourses\" />
     <Folder Include="unittests\" />
     <Folder Include="ui\" />

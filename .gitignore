@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /PyGUI/env_py_gui
+/PyGUI/env_py_gui2
